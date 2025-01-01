@@ -14,7 +14,7 @@
             <blockquote id="quote">Loading...</blockquote>
             <span id="author">Loading...</span>
             <div>
-                <button onClick="getquote(api_url)">New Quote</button>
+                <button onClick="getQuote(api_url)">New Quote</button>
                 <button onClick="tweet()"><img
                         src="images/twitter.png">Tweet</button>
             </div>
@@ -25,19 +25,18 @@
         const author = document.getElementById("author");
         const api_url = "https://dummyjson.com/quotes/random" 
 
-        async function getquote(url){
+        async function getQuote(url){
             const response = await fetch(url);
             var data = await response.json(); 
             quote.innerHTML = data.content; 
             author.innerHTML = data.author;
         }
 
-        getquote(api_url);
+        getQuote(api_url);
 
         function tweet(){
             window.open("https://twitter.com/intent/tweet?text=" + quote.innerHTML + "---- by " + author.innerHTML, "Tweet Window", "width=600, height=300");
         }
-
         </script>
     </body>
 </html>
