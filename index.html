@@ -26,10 +26,19 @@
         const api_url = "https://dummyjson.com/quotes/random" 
 
         async function getQuote(url){
-            const response = await fetch(url);
-            var data = await response.json(); 
-            quote.innerHTML = data.content; 
-            author.innerHTML = data.author;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                var data = await response.json(); 
+                console.log(data);
+                quote.innerHTML = data.quote; 
+                author.innerHTML = data.author;
+            } catch (error) {
+                console.error("Error fetching the quote", error);
+                quote.innerHTML = "Failed to load quote.";
+            }
         }
 
         getQuote(api_url);
